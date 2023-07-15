@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Power distribution display</title>
+        <style>
+            .container {
+                width: 500px;
+                height: 400px;
+                border: 1px solid #720570;
+            }
+            .anchors { 
+                fill: #2e2e2e;
+            }
+            .node {
+                fill: #2e2e2e;
+                filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.74));
+            }
+            .nodetext {
+                fill: #FFFFFFFF;
+                font-family: "Helvetica";
+                font-weight: bold;
+                text-anchor: middle;
+                alignment-baseline: central;
+            }
+            .edge {
+                stroke: #2969df;
+                stroke-width: 3px;
+                fill: transparent
+            }
+            .edgevalue {
+                fill: rgb(0, 0, 0);
+                font-family: "Helvetica";
+                font-weight: bold;
+                text-anchor: middle;
+                alignment-baseline: central;
+            }
+            .marker {
+                fill: #2969df;
+                r: 4;
+            }
+        </style>
+        <script src="https://d3js.org/d3.v7.min.js" defer></script>
+        <script src="power_dist.js" defer></script>
+    </head>
+    <body>
+        <svg></svg>
+    </body>
+</html>
