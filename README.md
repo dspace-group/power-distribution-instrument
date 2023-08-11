@@ -1,7 +1,7 @@
 # power-distribution-instrument
 This is an instrument for dSPACE ControlDesk to visualize power distribution.
 
-![](anim.gif)
+![](anim.mkv)
 
 ## Build instrument from scratch
 
