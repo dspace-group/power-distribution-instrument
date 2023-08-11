@@ -3,19 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="x-ua-compatible" content="IE=Edge" />  <!-- force standard mode instead of compat view -->
         <title>Power distribution display</title>
         <style>
-            .container {
-                width: 500px;
-                height: 400px;
-                border: 1px solid #720570;
-            }
-            .anchors { 
-                fill: #2e2e2e;
-            }
             .node {
-                fill: #2e2e2e;
-                filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.74));
+                fill: rgba(0, 69, 148, 0.651);
+                filter: drop-shadow(1px 1px 1px rgba(0, 69, 148, 0.74));
             }
             .nodetext {
                 fill: #FFFFFFFF;
@@ -25,7 +18,7 @@
                 alignment-baseline: central;
             }
             .edge {
-                stroke: #2969df;
+                stroke: rgba(212, 0, 49, 0.61);
                 stroke-width: 3px;
                 fill: transparent
             }
@@ -37,14 +30,15 @@
                 alignment-baseline: central;
             }
             .marker {
-                fill: #2969df;
+                fill: rgba(212, 0, 49, 0.61);
                 r: 4;
             }
         </style>
-        <script src="https://d3js.org/d3.v7.min.js" defer></script>
-        <script src="power_dist.js" defer></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v7.min.js" defer></script>
+        <script type="text/javascript" src="power_dist.js" defer></script>
     </head>
     <body>
+        <div class="dbg"></div>
         <svg></svg>
     </body>
 </html>
