@@ -23,7 +23,10 @@ class InstrumentEvents(object):
         # update HTML/JS
         nodes_data = [{"id": cp.Value, "r": 40} for cp in sender.CustomProperties if cp.Name == "Node"]
         edges_data = [{"value": 0, "source":cp.Value.split("->")[0], "target":cp.Value.split("->")[1]} for cp in sender.CustomProperties if cp.Name == "Link" and cp.Value.split("->")[0] in [n["id"] for n in nodes_data] and cp.Value.split("->")[1] in [n["id"] for n in nodes_data]]
+        cps = { cp.Name:cp for cp in sender.CustomProperties}
         
+        for cpName in ["Unit", "Digits", "Min", "Max", "Width", "Height", "Padding"]:
+            Instrument.InvokeScript('setParam', (cps[cpName].Name.lower(), cps[cpName].Value))        
         Instrument.InvokeScript('configureJson', (json.dumps(nodes_data), json.dumps(edges_data), ))
         Instrument.InvokeScript('animate', ())
         

@@ -21,6 +21,6 @@ bi.CustomProperties.Add(3, "Digits").Category = "Power Distribution"
 bi.CustomProperties.Add(3, "Min").Category = "Power Distribution"
 bi.CustomProperties.Add(3, "Max").Category = "Power Distribution"
 bi.CustomProperties.Add(3, "Width").Category = "Power Distribution"
-bi.CustomProperties.Add(3, "Hight").Category = "Power Distribution"
+bi.CustomProperties.Add(3, "Height").Category = "Power Distribution"
 bi.CustomProperties.Add(3, "Padding").Category = "Power Distribution"
 ```
