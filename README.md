@@ -1,7 +1,7 @@
 # power-distribution-instrument
 This is an instrument for dSPACE ControlDesk to visualize power distribution.
 
-[anim.webm](https://github.com/dspace-group/power-distribution-instrument/assets/9103508/ae753b5c-2e72-4805-9e88-79eed24270a6)
+![anim](https://github.com/dspace-group/power-distribution-instrument/assets/9103508/d3751df9-ea99-402a-9847-6813866bf24b)
 
 ## ControlDesk: Build Power Distribution Instrument from scratch
 
