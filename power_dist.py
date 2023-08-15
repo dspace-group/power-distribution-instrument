@@ -17,19 +17,6 @@ EXAMPLE_TERMS = ["Robot", "Conveyor", "PLC", "Scanner", "Actuator", "Cobot", "AG
                  "Turbine", "Emission", "Digester", "Ventilator", "Irrigation", "Purifier", "Composter"]
 
 class InstrumentEvents(object):
-    def __init__(self):
-        sender = Dispatch(Instrument)
-        
-        # update HTML/JS
-        nodes_data = [{"id": cp.Value, "r": 40} for cp in sender.CustomProperties if cp.Name == "Node"]
-        edges_data = [{"value": 0, "source":cp.Value.split("->")[0], "target":cp.Value.split("->")[1]} for cp in sender.CustomProperties if cp.Name == "Link" and cp.Value.split("->")[0] in [n["id"] for n in nodes_data] and cp.Value.split("->")[1] in [n["id"] for n in nodes_data]]
-        cps = { cp.Name:cp for cp in sender.CustomProperties}
-        
-        for cpName in ["Unit", "Digits", "Min", "Max", "Width", "Height", "Padding"]:
-            Instrument.InvokeScript('setParam', (cps[cpName].Name.lower(), cps[cpName].Value))        
-        Instrument.InvokeScript('configureJson', (json.dumps(nodes_data), json.dumps(edges_data), ))
-        Instrument.InvokeScript('animate', ())
-        
     def OnCustomPropertyChanged(self, sender_, customProperty_, action):
         if action != 0: return
 
@@ -91,7 +78,7 @@ class InstrumentEvents(object):
             while customProperty.Value in nodeNames: # avoid same names
                 customProperty.Value = random.choice(EXAMPLE_TERMS)
         else:
-            Instrument.InvokeScript('setParam', (customProperty.Name.lower(), customProperty.Value))
+            sender.InvokeScript('setParam', (customProperty.Name.lower(), customProperty.Value))
         
         #
         # Sync ConnectionNodes with "Link"-custom properties
@@ -115,9 +102,23 @@ class InstrumentEvents(object):
         nodes_data = [{"id": cp.Value, "r": 40} for cp in sender.CustomProperties if cp.Name == "Node"]
         edges_data = [{"value": 0, "source":cp.Value.split("->")[0], "target":cp.Value.split("->")[1]} for cp in sender.CustomProperties if cp.Name == "Link" and cp.Value.split("->")[0] in [n["id"] for n in nodes_data] and cp.Value.split("->")[1] in [n["id"] for n in nodes_data]]
         
-        Instrument.InvokeScript('configureJson', (json.dumps(nodes_data), json.dumps(edges_data), ))
-        Instrument.InvokeScript('animate', ())
-
+        sender.InvokeScript('configureJson', (json.dumps(nodes_data), json.dumps(edges_data), ))
+        sender.InvokeScript('animate', ())
+    def OnDataReceived(self, sender_, key, value):
+        if not key == "init":
+            return
+        
+        sender = Dispatch(sender_)
+        
+        # update HTML/JS
+        nodes_data = [{"id": cp.Value, "r": 40} for cp in sender.CustomProperties if cp.Name == "Node"]
+        edges_data = [{"value": 0, "source":cp.Value.split("->")[0], "target":cp.Value.split("->")[1]} for cp in sender.CustomProperties if cp.Name == "Link" and cp.Value.split("->")[0] in [n["id"] for n in nodes_data] and cp.Value.split("->")[1] in [n["id"] for n in nodes_data]]
+        cps = { cp.Name:cp for cp in sender.CustomProperties}
+        
+        sender.InvokeScript('configureJson', (json.dumps(nodes_data), json.dumps(edges_data), ))
+        sender.InvokeScript('animate', ())
+        for cpName in ["Unit", "Digits", "Min", "Max", "Width", "Height", "Padding"]:
+            sender.InvokeScript('setParam', (cps[cpName].Name.lower(), cps[cpName].Value))
     def OnConnectionAdded(self, sender, connectionObject, propertyName, variable):
         pass
     def OnConnectionAdding(self, sender, connectionObject, propertyName, variable, connectionAddingEventArgument):
@@ -125,8 +126,6 @@ class InstrumentEvents(object):
     def OnConnectionDeleted(self, sender, connectionObject, propertyName, variable):
         pass
     def OnConnectionDeleting(self, sender, connectionObject, propertyName, variable):
-        pass
-    def OnDataReceived(self, sender, key, value):
         pass
     def OnDeleting(self, sender):
         pass

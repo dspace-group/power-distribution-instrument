@@ -189,3 +189,4 @@ function valueChanged(jsonData) {
         entry.value = parseFloat(variable.Value).toFixed(PARAMS.digits);
     });
 }
+chrome.webview.hostObjects.browserInstrument.SendData("init", null)
