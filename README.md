@@ -1,5 +1,5 @@
 # power-distribution-instrument
-This is an instrument for dSPACE ControlDesk to visualize power distribution.
+This is an instrument for [dSPACE ControlDesk](https://www.dspace.com/en/inc/home/products/sw/experimentandvisualization/controldesk.cfm) to visualize power distribution.
 
 ![anim](https://github.com/dspace-group/power-distribution-instrument/assets/9103508/d3751df9-ea99-402a-9847-6813866bf24b)
 
@@ -23,3 +23,7 @@ bi.CustomProperties.Add(3, "Height").Category = "Power Distribution"
 bi.CustomProperties.Add(3, "Padding").Category = "Power Distribution"
 ```
 5. Open the Script-property and replace the default script by the content of the power_dist.py-script from this repo.
+
+## Acknowledgement
+
+Powered by [D3.js](https://d3js.org/).
